@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import Task from './Task'
 import { useStore } from './store'
 import { shallow } from "zustand/shallow"
@@ -15,6 +15,8 @@ const Column = ({ state }) => {
     const moveTask = useStore(state => state.moveTask)
 
     // console.log({ tasks })
+
+    const filtered = useMemo(() => tasks.filter(task => task.state === state, [tasks, state]))
 
     return (
         <div style={{ flexBasis: "33%", border: droppable ? "1px dashed black" : "1px solid red", padding: "20px" }}
